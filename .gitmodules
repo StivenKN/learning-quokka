@@ -1,0 +1,3 @@
+[submodule "server/user-management-database-api"]
+	path = server/user-management-database-api
+	url = https://github.com/ConanGH-S/user-management-database-api.git
