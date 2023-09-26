@@ -8,7 +8,12 @@ import Link from 'next/link'
 export default function Navbar(): ReactElement {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-  const responsiveItems = ['Inicio', 'Cursos', 'Registro', 'Iniciar sesión']
+  const responsiveItems = [
+    { text: 'Inicio', link: '/' },
+    { text: 'Cursos', link: '/courses' },
+    { text: 'Registro', link: '/register' },
+    { text: 'Iniciar sesión', link: '/login' }
+  ]
 
   return (
     <NextNavbar className='bg-[#121212]' isMenuOpen={isMenuOpen} isBordered onMenuOpenChange={setIsMenuOpen}>
@@ -23,23 +28,23 @@ export default function Navbar(): ReactElement {
         <Link href={'/'} aria-current='page'>
           Inicio
         </Link>
-        <Link href={'/cursos'} aria-current='page'>
+        <Link href={'/courses'} aria-current='page'>
           Cursos
         </Link>
       </NavbarContent>
       <NavbarContent justify='end' className='hidden sm:flex'>
-        <Link href={'/registro'} aria-current='page'>
+        <Link href={'/register'} aria-current='page'>
           Registrarse
         </Link>
-        <Link href={'/iniciar-sesion'} aria-current='page'>
+        <Link href={'/login'} aria-current='page'>
           Iniciar sesión
         </Link>
       </NavbarContent>
       <NavbarMenu className='dark'>
-        {responsiveItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
-            <Link className='w-full text-white' href='#'>
-              {item}
+        {responsiveItems.map(({ text, link }, index) => (
+          <NavbarMenuItem key={`${text}-${index}`}>
+            <Link className='w-full text-white' href={link} aria-current={link === '/' ? 'page' : undefined}>
+              {text}
             </Link>
           </NavbarMenuItem>
         ))}
