@@ -1,7 +1,20 @@
 {
   "name": "learning-quokka",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.1.1",
+  "private": false,
+  "author": {
+    "name": "Stiven Blandón Urrego",
+    "email": "blandon0207s@gmail.com",
+    "url": "https://github.com/conanGH-S"
+  },
+  "categories": [
+    "Education"
+  ],
+  "description": "A web page that brings courses about some tecnologies with certifies. Made with Next.JS",
+  "repository": {
+    "directory": "./",
+    "url": "https://github.com/ConanGH-S/learning-quokka.git"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,19 +22,22 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "next": "latest",
     "react": "latest",
-    "react-dom": "latest",
-    "next": "latest"
+    "react-dom": "latest"
   },
   "devDependencies": {
-    "typescript": "latest",
-    "@types/react": "latest",
     "@types/node": "latest",
+    "@types/react": "latest",
     "@types/react-dom": "latest",
     "autoprefixer": "latest",
-    "postcss": "latest",
-    "tailwindcss": "latest",
     "eslint": "latest",
-    "eslint-config-next": "latest"
+    "eslint-config-next": "latest",
+    "eslint-config-prettier": "9.0.0",
+    "postcss": "latest",
+    "prettier": "3.0.3",
+    "prettier-plugin-tailwindcss": "0.5.4",
+    "tailwindcss": "latest",
+    "typescript": "latest"
   }
 }

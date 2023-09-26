@@ -1,22 +1,24 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Roboto } from 'next/font/google'
 
-const inter = Inter({ subsets: ['latin'] })
+const roboto = Roboto({ subsets: ['latin'], weight: '400' })
 
 export const metadata: Metadata = {
   title: 'Learning Quokka',
   description: 'Learn your life, learn every you like.',
+  authors: [
+    { name: 'Stiven Blandón Urrego', url: 'https://github.com/ConanGH-S' },
+    { name: 'Angie Vannesa Mendieta', url: 'https://github.com/AngieVMR29' },
+    { name: 'Mario Alfonso Orozco Pachecho', url: 'https://github.com/alfons03' }
+  ],
+  colorScheme: 'dark light'
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang='es'>
+      <body className={roboto.className}>{children}</body>
     </html>
   )
 }
