@@ -32,7 +32,7 @@ export default function Navbar(): ReactElement {
           Cursos
         </Link>
       </NavbarContent>
-      <NavbarContent justify='end' className='hidden sm:flex'>
+      <NavbarContent justify='end' className='hidden sm:flex sm:gap-8'>
         <Link href={'/register'} aria-current='page'>
           Registrarse
         </Link>

@@ -5,7 +5,7 @@ import { Providers } from './providers'
 import Navbar from './components/navbar'
 import { type ReactElement } from 'react'
 
-const roboto = Roboto({ subsets: ['latin'], weight: '400' })
+const roboto = Roboto({ subsets: ['latin'], weight: ['400', '700', '100', '300', '900'] })
 
 export const metadata: Metadata = {
   title: 'Learning Quokka',
@@ -21,11 +21,14 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }): ReactElement {
   return (
     <html lang='es'>
-      <body className={roboto.className}>
+      <body className={`${roboto.className} min-h-screen`}>
         <Navbar />
         <Providers>
-          <main className='text-foreground bg-background dark'>{children}</main>
+          <main className='bg-background text-foreground dark'>{children}</main>
         </Providers>
+        <footer className='mt-4 w-full border-t border-t-[#ffbe0b] bg-[#181818] py-2'>
+          <p className='text-center font-light'>Derechos reservados SENASoft 2023 ©️</p>
+        </footer>
       </body>
     </html>
   )

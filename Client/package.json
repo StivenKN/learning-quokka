@@ -27,6 +27,8 @@
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
+    "react-icons": "^4.11.0",
+    "recharts": "2.8.0",
     "zustand": "^4.4.1"
   },
   "devDependencies": {
