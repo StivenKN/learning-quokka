@@ -1,6 +1,6 @@
 {
   "name": "learning-quokka",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": false,
   "author": {
     "name": "Stiven Blandón Urrego",
@@ -23,12 +23,15 @@
   },
   "dependencies": {
     "@nextui-org/react": "^2.1.13",
+    "axios": "^1.5.1",
     "framer-motion": "^10.16.4",
+    "joi": "^17.10.2",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
     "react-icons": "^4.11.0",
     "recharts": "2.8.0",
+    "sonner": "^1.0.3",
     "zustand": "^4.4.1"
   },
   "devDependencies": {
