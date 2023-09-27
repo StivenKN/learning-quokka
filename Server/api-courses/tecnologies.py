@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template, request, url_for, redirect
 
 from flask_mysqldb import MySQL
 
@@ -11,14 +11,18 @@ app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'tecnologie_data'
 mysql = MySQL(app)
 
+
 @app.route('/')
 def index():
+    return render_template('cursos.html')
+
+
+@app.route('/cursos')
+def cursos():
     cur = mysql.connection.cursor()
     cur.execute('SELECT * FROM tecnologies')
     data = cur.fetchall()
-    print(data)
-    return 'Cursos tecnologies'
-
+    return render_template('cursos.html', tecnology = data)
  
 
 if __name__ == '__main__':
