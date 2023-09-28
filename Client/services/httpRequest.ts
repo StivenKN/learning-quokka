@@ -10,4 +10,14 @@ export class Requests {
     const response = await axios.post(`${this.url}register-user/email`, payload, { headers: { 'x-public-key': this.APIKEY } })
     return response.status
   }
+
+  public async login(payload: object): Promise<{ data: string; status: number }> {
+    const response = await axios.post(`${this.url}login-user/email?expirationTime=1d`, payload, { headers: { 'x-public-key': this.APIKEY } })
+    return { data: response.data, status: response.status }
+  }
+
+  public async getCoursesData(): Promise<any> {
+    const response = await axios.get(`https://l95c1m74-3002.use2.devtunnels.ms/`)
+    return response.data
+  }
 }
