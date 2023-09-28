@@ -1,6 +1,9 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
+import { Providers } from './providers'
+import Navbar from './components/navbar'
+import { type ReactElement } from 'react'
 
 const roboto = Roboto({ subsets: ['latin'], weight: '400' })
 
@@ -15,10 +18,15 @@ export const metadata: Metadata = {
   colorScheme: 'dark light'
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: { children: React.ReactNode }): ReactElement {
   return (
     <html lang='es'>
-      <body className={roboto.className}>{children}</body>
+      <body className={roboto.className}>
+        <Navbar />
+        <Providers>
+          <main className='text-foreground bg-background dark'>{children}</main>
+        </Providers>
+      </body>
     </html>
   )
 }
