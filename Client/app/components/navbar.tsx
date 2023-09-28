@@ -1,12 +1,33 @@
 'use client'
 
 import Image from 'next/image'
-import { Navbar as NextNavbar, NavbarContent, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, NavbarItem } from '@nextui-org/react'
-import { type ReactElement, useState } from 'react'
+import { Navbar as NextNavbar, NavbarContent, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, NavbarItem, Button } from '@nextui-org/react'
+import { type ReactElement, useState, useEffect } from 'react'
 import Link from 'next/link'
+import { userCookie } from '@/store/global'
+import Cookies from 'js-cookie'
+import jwt from 'jsonwebtoken'
 
 export default function Navbar(): ReactElement {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [infoUser, setInfoUser]: any = useState(null)
+  const cookie = Cookies.get('userData')
+  const { setUserData }: any = userCookie()
+
+  useEffect(() => {
+    if (cookie !== undefined || String(cookie).length > 0) {
+      const decoded: any = jwt.decode(cookie as string)
+      if (decoded === null) return
+      const payload = decoded.payload
+      setUserData(payload)
+      setInfoUser(payload)
+    }
+  }, [cookie, setUserData])
+
+  const logout = (): void => {
+    Cookies.remove('userData')
+    window.location.reload()
+  }
 
   const responsiveItems = [
     { text: 'Inicio', link: '/' },
@@ -33,17 +54,40 @@ export default function Navbar(): ReactElement {
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify='end' className='hidden sm:flex sm:gap-8'>
-        <Link href={'/register'}>Registrarse</Link>
-        <Link href={'/login'}>Iniciar sesión</Link>
+        {infoUser !== null ? (
+          <>
+            <p>{infoUser.userName ?? infoUser.userEmail ?? undefined}</p>
+            <Button onClick={logout}>Cerrar sesión</Button>
+          </>
+        ) : (
+          <>
+            <Link href={'/register'}>Registrarse</Link>
+            <Link href={'/login'}>Iniciar sesión</Link>
+          </>
+        )}
       </NavbarContent>
       <NavbarMenu className='dark'>
-        {responsiveItems.map(({ text, link }, index) => (
-          <NavbarMenuItem key={`${text}-${index}`}>
-            <Link className='w-full text-white' href={link}>
-              {text}
-            </Link>
-          </NavbarMenuItem>
-        ))}
+        {infoUser !== null ? (
+          <>
+            {responsiveItems.slice(0, 2).map(({ text, link }, index) => (
+              <NavbarMenuItem key={`${text}-${index}`}>
+                <Link className='w-full text-white' href={link}>
+                  {text}
+                </Link>
+              </NavbarMenuItem>
+            ))}
+            <p>{infoUser.userName ?? infoUser.userEmail ?? undefined}</p>
+            <Button onClick={logout}>Cerrar sesión</Button>
+          </>
+        ) : (
+          responsiveItems.map(({ text, link }, index) => (
+            <NavbarMenuItem key={`${text}-${index}`}>
+              <Link className='w-full text-white' href={link}>
+                {text}
+              </Link>
+            </NavbarMenuItem>
+          ))
+        )}
       </NavbarMenu>
     </NextNavbar>
   )
