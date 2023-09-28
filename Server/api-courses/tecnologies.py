@@ -1,6 +1,6 @@
-from flask import Flask, render_template, request, url_for, redirect
-
+from flask import Flask, render_template, request, url_for, redirect, jsonify
 from flask_mysqldb import MySQL
+import json
 
  
 
@@ -14,15 +14,16 @@ mysql = MySQL(app)
 
 @app.route('/')
 def index():
-    return render_template('cursos.html')
-
-
-@app.route('/cursos')
-def cursos():
     cur = mysql.connection.cursor()
     cur.execute('SELECT * FROM tecnologies')
-    data = cur.fetchall()
-    return render_template('cursos.html', tecnology = data)
+    datas = cur.fetchall()
+    
+    tecnologies = [{"id_tecnology": data[0], "name_tecnology": data[1], "description_tecnology": data[2]} for data in datas]
+    print (tecnologies)
+    
+    jsonToSend = json.dumps(tecnologies, ensure_ascii=True)
+    return jsonify(jsonToSend)
+ 
  
 
 if __name__ == '__main__':
