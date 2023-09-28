@@ -35,20 +35,10 @@ def index():
 
 @app.route('/section/<int:id>')
 def section(id):  
-    # id = request.args['id']
     cur = mysql.connection.cursor()
     cur.execute(f'SELECT * FROM section_description where id_section_description = {id}')
     dates = cur.fetchall()
     tectitle = [{"Titulo":date[2],"Informacion":date[3], "number": date[1], "id": date[0]} for date in dates]
-    
-    # cur = mysql.connection.cursor()
-    # cur.execute('SELECT * FROM videos')
-    # datas = cur.fetchall()
-    # video = [{"video":data[1]} for data in datas]
-    # print(id)
-    
-    # arr = []
-    # arr.append([tectitle,video])
     return (tectitle) 
 
 if __name__ == '__main__':
